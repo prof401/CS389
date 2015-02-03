@@ -7,4 +7,6 @@
     <string name="hello2">Hello world from Haiku</string>
 	<string name="airplane">Airplane</string>
 	<string name="haiku">Haiku</string>
+	<string name="play_message">Catch plane</string>
+	<string name="pause_message">Leave airport</string>
 </resources>

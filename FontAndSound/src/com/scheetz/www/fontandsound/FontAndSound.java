@@ -1,12 +1,19 @@
 package com.scheetz.www.fontandsound;
 
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class FontAndSound extends Activity {
+public class FontAndSound extends Activity implements OnClickListener, OnCompletionListener {
+	MediaPlayer player;
+	Button flyby;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +31,36 @@ public class FontAndSound extends Activity {
         customText2.setTypeface(font2);
         customText2.setTextSize(30.f);
         customText2.setText(R.string.hello2);
+        
+        // connect the button to an object
+        flyby = (Button)findViewById(R.id.button);
+        flyby.setOnClickListener(this);
+        
+        // instantiate a MediaPlayer instance
+		player = MediaPlayer.create(getApplicationContext(), R.raw.plane);
+		player.setLooping(false);
+		player.setOnCompletionListener(this);
     }
+
+    // when the button is clicked we want to hear a sound
+	public void onClick(View v) {
+		
+		// play or pause the sound, as appropriate
+		if(player.isPlaying()) {
+			player.pause();
+			
+			// reset button text
+			flyby.setText(R.string.play_message);
+		} else {
+			flyby.setText(R.string.pause_message);
+			player.start();
+		}
+	}
+	
+	// reset button text when the sound is done playing
+	public void onCompletion(MediaPlayer mp) {
+		flyby.setText(R.string.play_message);
+	}
 
 
     @Override
