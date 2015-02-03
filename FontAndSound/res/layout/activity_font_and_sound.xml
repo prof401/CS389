@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -17,18 +17,18 @@
 	/>
     <TextView
 	    android:id="@+id/text1"
-	    android:layout_width="fill_parent" 
+	    android:layout_width="wrap_content" 
         android:layout_height="wrap_content" />
 
  	<ImageView
 	    android:contentDescription="@string/haiku"
 		android:src="@drawable/tyronelarge"
-		android:layout_width="fill_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" 
 	/>
     <TextView
 	    android:id="@+id/text2"
-	    android:layout_width="fill_parent" 
+	    android:layout_width="wrap_content" 
         android:layout_height="wrap_content" />
 	<Button
 		android:id="@+id/button"
@@ -36,4 +36,4 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" 
 	/>	
-</RelativeLayout>
+</LinearLayout>
