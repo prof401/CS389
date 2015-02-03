@@ -19,11 +19,11 @@ public class FontAndSound extends Activity {
 
         customText1.setTypeface(font1);
         customText1.setTextSize(40.f);
-        customText1.setText("Airplanes");
+        customText1.setText(R.string.hello1);
         
         customText2.setTypeface(font2);
         customText2.setTextSize(30.f);
-        customText2.setText("Haiku");
+        customText2.setText(R.string.hello2);
     }
 
 

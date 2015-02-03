@@ -4,7 +4,7 @@
     <string name="app_name">FontAndSound</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name= "hello1">Hello world from Airplanes in the Night Sky </string>
-    <string name= "hello2">Hello world from Haiku\'s Script </string>
+    <string name="hello1">Hello world from Airplanes in the Night Sky </string>
+    <string name="hello2">Hello world from Haiku Script </string>
 
 </resources>
