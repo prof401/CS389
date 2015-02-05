@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Nasa Daily Image</string>
+    <string name="action_settings">Settings</string>
+	<string name="test_image_title">
+	    Decorating the Sky
+	    
+	</string>
+	<string name="test_image_date">
+	    Mon, 27 Dec 2010 00:00:00 EST
+	</string>
+	
+	<string name="test_image_description">
+	    NASA\'s Curiosity Mars rover can be seen at the \"Pahrump Hills\" area of Gale Crater in this view from the High Resolution Imaging Science Experiment (HiRISE) camera on NASA\'s Mars Reconnaissance Orbiter.  Pahrump Hills is an outcrop at the base of Mount Sharp. The region contains sedimentary rocks that scientists believe formed in the presence of water.
+		The location of the rover, with its shadow extending toward the upper right, is indicated with an inscribed rectangle. Figure A is an unannotated version of the image.  North is toward the top. The view covers an area about 360 yards (330 meters) across. 
+	</string>
+</resources>
