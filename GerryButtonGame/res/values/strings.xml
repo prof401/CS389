@@ -4,5 +4,7 @@
     <string name="app_name">GerryButtonGame</string>
     <string name="action_settings">Settings</string>
     <string name="instructions">Try to change all buttons to second color.</string>
-
+    <string name="clicklabel">Clicks:</string>
+    <string name="zero">0</string>
+    
 </resources>
