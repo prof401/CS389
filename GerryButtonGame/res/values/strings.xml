@@ -5,6 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="instructions">Try to change all buttons to second color.</string>
     <string name="clicklabel">Clicks:</string>
+    <string name="correctlabel">Correct:</string>
     <string name="zero">0</string>
     
 </resources>
