@@ -7,5 +7,7 @@
     <string name="clicklabel">Clicks:</string>
     <string name="correctlabel">Correct:</string>
     <string name="zero">0</string>
+    <string name="winner">YOU WON!!!</string>
+    <string name="reset_button">Reset</string>
     
 </resources>
