@@ -86,7 +86,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < columns; c++) {
 				Button b = new Button(this);
-				b.setBackgroundColor(Color.RED);
+				b.setBackgroundColor(startColor);
 				LayoutParams params = new LayoutParams();
 				params.setMargins(5, 0, 0, 5);
 				params.width = 50;
@@ -122,7 +122,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		winnerDialog = new Dialog(this) {
 			protected void onStop() {
 				Log.d(this.getClass().getName(), ">>onStop in onWin");
-				GameActivity.this.reset();
+				GameActivity.this.resetBoard();
 				Log.d(this.getClass().getName(), "<<onStop in onWin");
 			}
 		};
@@ -149,7 +149,7 @@ public class GameActivity extends Activity implements OnClickListener {
 
 		switch (((Button) view).getId()) {
 		case R.id.resetbutton:
-			reset();
+			resetBoard();
 			break;
 		default:
 			// cell button pressed
@@ -170,7 +170,7 @@ public class GameActivity extends Activity implements OnClickListener {
 				board[neighborRow][neighborColumn].changeColor();
 			}
 
-			updateView();
+			updateClickCount();
 		}
 		if (correctCount == (rows * columns)) {
 			onWin();
@@ -183,9 +183,9 @@ public class GameActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 
-		setup();
+		setupGame();
 
-		reset();
+		resetBoard();
 	}
 
 	@Override
@@ -227,8 +227,8 @@ public class GameActivity extends Activity implements OnClickListener {
 		Log.d(this.getClass().getName(), "<<randomizeColors");
 	}
 
-	private void reset() {
-		Log.d(this.getClass().getName(), ">>reset");
+	private void resetBoard() {
+		Log.d(this.getClass().getName(), ">>resetBoard");
 		clickCount = 0;
 		correctCount = 0;
 		randomizeColors();
@@ -238,11 +238,11 @@ public class GameActivity extends Activity implements OnClickListener {
 				board[row][column].reset();
 			}
 		}
-		updateView();
-		Log.d(this.getClass().getName(), "<<reset");
+		updateClickCount();
+		Log.d(this.getClass().getName(), "<<resetBoard");
 	}
 
-	private void setup() {
+	private void setupGame() {
 		Button resetButton = (Button) findViewById(R.id.resetbutton);
 		resetButton.setOnClickListener(this);
 
@@ -251,7 +251,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		createWinnerDialog();
 	}
 
-	private void updateView() {
+	private void updateClickCount() {
 		((TextView) findViewById(R.id.clicknumber)).setText(Integer
 				.toString(clickCount));
 	}
