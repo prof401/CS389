@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +24,10 @@ public class NasaDailyImage extends Activity {
 		Log.i(this.getClass().getName(), "<<onCreate");
 	}
 
+	public void onRefresh(View view) {
+		refreshFromFeed();
+	}
+	
 	private void refreshFromFeed() {
 
 		Thread thread = new Thread(new Runnable() {
