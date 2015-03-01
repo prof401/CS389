@@ -6,8 +6,7 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        >
+        android:layout_weight="1" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -18,13 +17,12 @@
                 android:id="@+id/imageTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/test_image_title" />
+                android:text="@string/loading" />
 
             <TextView
                 android:id="@+id/imageDate"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/test_image_date" />
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:id="@+id/imageDisplay"
@@ -38,23 +36,30 @@
                 android:id="@+id/imageDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/test_image_description" />
-
+                android:text="@string/loadingtext" />
         </LinearLayout>
     </ScrollView>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:gravity="center"
         android:layout_marginTop="5dp"
+        android:layout_weight="0"
         android:background="#ff8d8d8d"
+        android:gravity="center"
         android:padding="5dp" >
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onRefresh"
             android:text="@string/refresh" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onSetWallpaper"
+            android:text="@string/setwallpaper" />
     </LinearLayout>
+
 </LinearLayout>
