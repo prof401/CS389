@@ -17,15 +17,16 @@
                 android:id="@+id/imageTitle"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginTop="5dp"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:layout_marginTop="5dp" />
 
             <TextView
                 android:id="@+id/imageDate"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginBottom="5dp"
-                android:textSize="10dp" />
+                android:textSize="10dp"
+                android:text=" " />
 
             <ImageView
                 android:id="@+id/imageDisplay"
