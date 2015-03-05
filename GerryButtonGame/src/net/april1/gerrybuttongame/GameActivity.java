@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.GridLayout.LayoutParams;
@@ -24,12 +26,14 @@ public class GameActivity extends Activity implements OnClickListener {
 		private int column;
 
 		private int row;
+
 		public Cell(Button newButton, int newRow, int newColumn) {
 			button = newButton;
 			row = newRow;
 			column = newColumn;
 
 		}
+
 		public void changeColor() {
 			ColorDrawable buttonColor = (ColorDrawable) button.getBackground();
 
@@ -44,6 +48,9 @@ public class GameActivity extends Activity implements OnClickListener {
 					correctCount--;
 				}
 			}
+			Animation a = AnimationUtils.loadAnimation(GameActivity.this,
+					R.animator.cellchange);
+			button.startAnimation(a);
 		}
 
 		public int getColumn() {
@@ -63,6 +70,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			return String.format("%1d:%1d", row, column);
 		}
 	}
+
 	private static final int[] COLUMNNEIGHBOR = { 0, 1, 0, -1 };
 	private static final Random RANDOM = new Random();
 	private static final int[] ROWNEIGHBOR = { -1, 0, 1, 0 };
