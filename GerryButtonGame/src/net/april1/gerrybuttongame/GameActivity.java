@@ -48,9 +48,9 @@ public class GameActivity extends Activity implements OnClickListener {
 					correctCount--;
 				}
 			}
-			Animation a = AnimationUtils.loadAnimation(GameActivity.this,
-					R.animator.cellchange);
-			button.startAnimation(a);
+//			Animation a = AnimationUtils.loadAnimation(GameActivity.this,
+//					R.animator.cellchange);
+//			button.startAnimation(a);
 		}
 
 		public int getColumn() {
@@ -71,9 +71,11 @@ public class GameActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	private static final int[] COLUMNNEIGHBOR = { 0, 1, 0, -1 };
+	// private static final int[] COLUMNNEIGHBOR = { 0, 1, 0, -1 };
+	private static final int[] COLUMNNEIGHBOR = { -1, 0, 1, -1, 1, -1, 0, 1 };
 	private static final Random RANDOM = new Random();
-	private static final int[] ROWNEIGHBOR = { -1, 0, 1, 0 };
+	// private static final int[] ROWNEIGHBOR = { -1, 0, 1, 0 };
+	private static final int[] ROWNEIGHBOR = { -1, -1, -1, 0, 0, 1, 1, 1 };
 	private Cell[][] board;
 	private int clickCount = 0;
 	private int columns = 4;
@@ -169,7 +171,7 @@ public class GameActivity extends Activity implements OnClickListener {
 			cellClicked.changeColor();
 
 			// Change neighbors
-			for (int neighbor = 0; neighbor < 4; neighbor++) {
+			for (int neighbor = 0; neighbor < ROWNEIGHBOR.length; neighbor++) {
 				int neighborRow = rowClicked + ROWNEIGHBOR[neighbor];
 				int neighborColumn = columnClicked + COLUMNNEIGHBOR[neighbor];
 				if (neighborRow < 0 || neighborColumn < 0
