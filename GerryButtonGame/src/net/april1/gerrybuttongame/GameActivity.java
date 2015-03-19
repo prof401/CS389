@@ -2,10 +2,13 @@ package net.april1.gerrybuttongame;
 
 import java.util.Random;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -35,22 +38,49 @@ public class GameActivity extends Activity implements OnClickListener {
 		}
 
 		public void changeColor() {
-			ColorDrawable buttonColor = (ColorDrawable) button.getBackground();
-
-			int colorId = buttonColor.getColor();
+			int colorId = 0;
+			Drawable buttonDrawable = button.getBackground();
+			if (buttonDrawable instanceof ColorDrawable) {
+				ColorDrawable buttonColor = (ColorDrawable) button
+						.getBackground();
+				colorId = buttonColor.getColor();
+			} else {
+				TransitionDrawable td = (TransitionDrawable)buttonDrawable;
+				ColorDrawable d = (ColorDrawable)td.getDrawable(1);
+				colorId = d.getColor();
+			}
 
 			if (colorId == startColor) {
-				button.setBackgroundColor(endColor);
+				Log.d(this.getClass().getName(), "##change from start to end");
+				// Let's change background's color from blue to red.
+				ColorDrawable[] color = { new ColorDrawable(startColor),
+						new ColorDrawable(endColor) };
+				TransitionDrawable trans = new TransitionDrawable(color);
+				// This will work also on old devices. The latest API says you
+				// have to use setBackground instead.
+				trans.startTransition(1000);
+				button.setBackgroundDrawable(trans);
 				correctCount++;
 			} else {
 				if (colorId == endColor) {
-					button.setBackgroundColor(startColor);
+					Log.d(this.getClass().getName(),
+							"##change from end to start");
+					// Let's change background's color from blue to red.
+					ColorDrawable[] color = { new ColorDrawable(endColor),
+							new ColorDrawable(startColor) };
+					TransitionDrawable trans = new TransitionDrawable(color);
+					// This will work also on old devices. The latest API says
+					// you have to use setBackground instead.
+					button.setBackgroundDrawable(trans);
+					trans.startTransition(1000);
+
+					// button.setBackgroundColor(startColor);
 					correctCount--;
 				}
 			}
-//			Animation a = AnimationUtils.loadAnimation(GameActivity.this,
-//					R.animator.cellchange);
-//			button.startAnimation(a);
+			// Animation a = AnimationUtils.loadAnimation(GameActivity.this,
+			// R.animator.cellchange);
+			// button.startAnimation(a);
 		}
 
 		public int getColumn() {
@@ -71,11 +101,12 @@ public class GameActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	// private static final int[] COLUMNNEIGHBOR = { 0, 1, 0, -1 };
-	private static final int[] COLUMNNEIGHBOR = { -1, 0, 1, -1, 1, -1, 0, 1 };
+	private static final int[] COLUMNNEIGHBOR = { 0, 1, 0, -1 };
+	// private static final int[] COLUMNNEIGHBOR = { -1, 0, 1, -1, 1, -1, 0, 1
+	// };
 	private static final Random RANDOM = new Random();
-	// private static final int[] ROWNEIGHBOR = { -1, 0, 1, 0 };
-	private static final int[] ROWNEIGHBOR = { -1, -1, -1, 0, 0, 1, 1, 1 };
+	private static final int[] ROWNEIGHBOR = { -1, 0, 1, 0 };
+	// private static final int[] ROWNEIGHBOR = { -1, -1, -1, 0, 0, 1, 1, 1 };
 	private Cell[][] board;
 	private int clickCount = 0;
 	private int columns = 4;
