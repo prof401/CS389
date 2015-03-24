@@ -3,6 +3,7 @@ package net.april1.gerryrunnerapp;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class TimeTrackerAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public Object getItem(int index) {
+	public TimeRecord getItem(int index) {
 		return times.get(index);
 	}
 
@@ -43,7 +44,7 @@ public class TimeTrackerAdapter extends BaseAdapter {
 			view = inflater.inflate(R.layout.time_list_item, parent, false);
 		}
 
-		TimeRecord time = times.get(index);
+		TimeRecord time = this.getItem(index);
 
 		TextView timeTextView = (TextView) view.findViewById(R.id.time_view);
 		timeTextView.setText(time.getTime());
