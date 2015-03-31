@@ -52,14 +52,17 @@ public class MysticGame {
 		final int columnDelta[] = { 0, -1, 1, 0 };
 
 		for (int deltaIndex = 0; deltaIndex < rowDelta.length; deltaIndex++) {
-			if (board[row + rowDelta[deltaIndex]][column
-					+ columnDelta[deltaIndex]].isBlank()) {
-				exchangeTiles(row, column, row + rowDelta[deltaIndex], column
-						+ columnDelta[deltaIndex]);
-				return true;
+			int newRow = row + rowDelta[deltaIndex];
+			int newColumn = column + columnDelta[deltaIndex];
+			// is newRow and newColumn on the board
+			if (newRow > -1 && newRow < rowCount && newColumn > -1
+					&& newColumn < columnCount) {
+				if (board[newRow][newColumn].isBlank()) {
+					exchangeTiles(row, column, newRow, newColumn);
+					return true;
+				}
 			}
 		}
-
 		return false;
 	}
 

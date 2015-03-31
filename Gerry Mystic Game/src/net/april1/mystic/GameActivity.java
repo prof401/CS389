@@ -5,17 +5,17 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.GridView;
-import android.widget.ListView;
 
 public class GameActivity extends Activity {
-
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	Log.d(this.getClass().getName(), ">>onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         
-//		GridView gridView = (GridView) findViewById(R.id.mystic_grid);
+		GridView gridView = (GridView) findViewById(R.id.mystic_grid);
+		gridView.setAdapter(new GameAdapter(this));
     }
 
 
