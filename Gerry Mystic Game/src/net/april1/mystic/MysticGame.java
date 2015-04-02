@@ -2,6 +2,8 @@ package net.april1.mystic;
 
 import java.util.Random;
 
+import android.util.Log;
+
 public class MysticGame {
 	private int rowCount = 4;
 	private int columnCount = 4;
@@ -14,6 +16,7 @@ public class MysticGame {
 			for (int column = 0; column < columnCount; column++) {
 				Cell newCell = new Cell(row, column, (row * columnCount)
 						+ column);
+				newCell.setFace(Integer.toString((row * rowCount) + column));
 				board[row][column] = newCell;
 			}
 		}
@@ -42,6 +45,12 @@ public class MysticGame {
 		return gameWon;
 	}
 
+	public boolean move(int position) {
+		int row = position / rowCount;
+		int column = position % columnCount;
+		return move(row, column);
+	}
+	
 	public boolean move(int row, int column) {
 		// check if blank was selected to move
 		// return false as do not know what cell to exchange with
@@ -70,6 +79,17 @@ public class MysticGame {
 		Cell temp = board[r1][c1];
 		board[r1][c1] = board[r2][c2];
 		board[r2][c2] = temp;
+	}
+
+	public String getFace(int position) {
+		int row = position / rowCount;
+		int column = position % columnCount;
+
+		Cell cell = board[row][column];
+		if (cell == null)
+			return "N";
+
+		return board[row][column].getFace();
 	}
 
 	public int getRowCount() {
