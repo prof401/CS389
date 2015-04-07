@@ -105,13 +105,12 @@ public class BoardView extends RelativeLayout {
 	}
 
 	public boolean isWon() {
-		Log.d(this.getClass().getName(), ">>isWon");
 		boolean won = true;
 		for (TileView view : gameTiles) {
-			Log.d(this.getClass().getName(), "##isWon " + Boolean.toString(won)
-					+ " " + view.getRow() + "," + view.getColumn() + "-> "
-					+ view.isCorrectPosition());
-			won &= view.isCorrectPosition();
+			if (!view.isCorrectPosition()) {
+				won = false;
+				break;
+			}
 		}
 
 		return won;
