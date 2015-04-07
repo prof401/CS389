@@ -25,7 +25,7 @@ public class BoardView extends RelativeLayout {
 
 	public void start() {
 		createTiles();
-		// shuffleTiles();
+		shuffleTiles();
 		placeTiles();
 	}
 
