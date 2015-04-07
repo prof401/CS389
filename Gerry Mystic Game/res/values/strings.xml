@@ -3,5 +3,7 @@
 
     <string name="app_name">Mystic Square</string>
     <string name="action_settings">Settings</string>
+    <string name="thumbsup">Thumbs up</string>
+    <string name="youwon">You Won!!!</string>
 
 </resources>
