@@ -39,7 +39,6 @@ public class BoardView extends RelativeLayout {
 		}
 	}
 
-	@SuppressWarnings("unused")
 	private void shuffleTiles() {
 		int exchanges = random.nextInt(100);
 		TileView[] tiles = (TileView[]) gameTiles
@@ -85,6 +84,14 @@ public class BoardView extends RelativeLayout {
 				gameTiles.add(newView);
 			}
 		}
+	}
+
+	public void setRows(int rows) {
+		rowCount = rows;
+	}
+
+	public void setColumns(int columns) {
+		columnCount = columns;
 	}
 
 	public boolean moveTile(View view) {

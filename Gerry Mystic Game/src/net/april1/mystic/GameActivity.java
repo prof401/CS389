@@ -5,11 +5,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 public class GameActivity extends Activity implements OnClickListener {
+	private static final int BOARD_SIZE_CODE = 1;
 	private BoardView boardView;
 	private TextView clickCounter;
 	private int clickCount;
@@ -73,8 +75,42 @@ public class GameActivity extends Activity implements OnClickListener {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.game, menu);
+		getMenuInflater().inflate(R.menu.gamemenu, menu);
 		return true;
+	}
+
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		Log.d(this.getClass().getName(), ">>onMenuItemSelected");
+		switch (item.getItemId()) {
+		case R.id.action_settings:
+			Intent intent = new Intent(this, SettingsActivity.class);
+			startActivityForResult(intent, BOARD_SIZE_CODE);
+			break;
+		case R.id.action_new_game:
+			boardView.removeAllViews();
+			initClicks();
+			boardView.start();
+			break;
+		default:
+			// if no case, return false
+			return super.onOptionsItemSelected(item);
+		}
+
+		return true;
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == BOARD_SIZE_CODE) {
+			if (resultCode == RESULT_OK) {
+				int size = data.getIntExtra("size", 4);
+				boardView.setRows(size);
+				boardView.setColumns(size);
+				boardView.removeAllViews();
+				initClicks();
+				boardView.start();
+			}
+		}
 	}
 
 	@Override
