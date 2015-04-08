@@ -49,7 +49,6 @@ public class TileView extends TextView {
 		return column;
 	}
 
-
 	public void setColumn(int column) {
 		this.column = column;
 	}

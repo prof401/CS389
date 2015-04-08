@@ -34,6 +34,11 @@ public class GameActivity extends Activity implements OnClickListener {
 		clickCount = 0;
 		clickCounter.setText("0 Clicks");
 	}
+	
+	protected void onStart() {
+		super.onStart();
+		Log.d(this.getClass().getName(), ">>onStart");
+	}
 
 	private void updateClicks() {
 		if (++clickCount == 1)
@@ -41,12 +46,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		else
 			clickCounter.setText(clickCount + " Clicks");
 	}
-
-	protected void onStart() {
-		super.onStart();
-		Log.d(this.getClass().getName(), ">>onStart");
-	}
-
+	
 	protected void onRestart() {
 		super.onRestart();
 		Log.d(this.getClass().getName(), ">>onRestart");
