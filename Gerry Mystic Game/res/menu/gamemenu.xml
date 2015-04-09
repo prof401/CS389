@@ -10,5 +10,10 @@
         android:orderInCategory="200"
         android:showAsAction="never"
         android:title="@string/action_new_game"/>
+    <item
+        android:id="@+id/action_load_image"
+        android:orderInCategory="300"
+        android:showAsAction="never"
+        android:title="@string/action_load_image"/>
 
 </menu>

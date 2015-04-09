@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 public class GameActivity extends Activity implements OnClickListener {
 	private static final int BOARD_SIZE_CODE = 1;
+	private static final int SELECT_PHOTO = 2;
 	private BoardView boardView;
 	private TextView clickCounter;
 	private int clickCount;
@@ -100,6 +101,10 @@ public class GameActivity extends Activity implements OnClickListener {
 			initClicks();
 			boardView.start();
 			break;
+		case R.id.action_load_image:
+			Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+			photoPickerIntent.setType("image/*");
+			startActivityForResult(photoPickerIntent, SELECT_PHOTO);
 		default:
 			// if no case, return false
 			return super.onOptionsItemSelected(item);
@@ -110,7 +115,18 @@ public class GameActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == BOARD_SIZE_CODE) {
+		switch (requestCode) {
+		case SELECT_PHOTO: {
+			//http://stackoverflow.com/questions/2507898/how-to-pick-an-image-from-gallery-sd-card-for-my-app
+	        if(resultCode == RESULT_OK){  
+	            Uri selectedImage = imageReturnedIntent.getData();
+	            InputStream imageStream = getContentResolver().openInputStream(selectedImage);
+	            Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+	        }
+
+			break;
+		}
+		case BOARD_SIZE_CODE: {
 			if (resultCode == RESULT_OK) {
 				int size = data.getIntExtra("size", 4);
 				boardView.setRows(size);
@@ -119,9 +135,41 @@ public class GameActivity extends Activity implements OnClickListener {
 				initClicks();
 				boardView.start();
 			}
+			break;
+		}
 		}
 	}
 
+	private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
+
+        // Decode image size
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage), null, o);
+
+        // The new size we want to scale to
+        final int REQUIRED_SIZE = 140;
+
+        // Find the correct scale value. It should be the power of 2.
+        int width_tmp = o.outWidth, height_tmp = o.outHeight;
+        int scale = 1;
+        while (true) {
+            if (width_tmp / 2 < REQUIRED_SIZE
+               || height_tmp / 2 < REQUIRED_SIZE) {
+                break;
+            }
+            width_tmp /= 2;
+            height_tmp /= 2;
+            scale *= 2;
+        }
+
+        // Decode with inSampleSize
+        BitmapFactory.Options o2 = new BitmapFactory.Options();
+        o2.inSampleSize = scale;
+        return BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage), null, o2);
+
+    }
+	
 	@Override
 	public void onClick(View view) {
 		if (view instanceof TileView) {
