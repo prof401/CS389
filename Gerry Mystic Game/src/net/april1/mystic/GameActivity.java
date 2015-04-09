@@ -1,7 +1,6 @@
 package net.april1.mystic;
 
 import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
