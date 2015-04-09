@@ -1,5 +1,7 @@
 package net.april1.mystic;
 
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,12 +17,20 @@ public class GameActivity extends Activity implements OnClickListener {
 	private BoardView boardView;
 	private TextView clickCounter;
 	private int clickCount;
+	private MediaPlayer badMove;
+	private MediaPlayer goodMove;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Log.d(this.getClass().getName(), ">>onCreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
+
+		badMove = MediaPlayer.create(getApplicationContext(), R.raw.bonk);
+		badMove.setLooping(false);
+
+		goodMove = MediaPlayer.create(getApplicationContext(), R.raw.slide);
+		goodMove.setLooping(false);
 
 		boardView = (BoardView) findViewById(R.id.mystic_grid);
 		clickCounter = (TextView) findViewById(R.id.click_count);
@@ -34,7 +44,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		clickCount = 0;
 		clickCounter.setText("0 Clicks");
 	}
-	
+
 	protected void onStart() {
 		super.onStart();
 		Log.d(this.getClass().getName(), ">>onStart");
@@ -46,7 +56,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		else
 			clickCounter.setText(clickCount + " Clicks");
 	}
-	
+
 	protected void onRestart() {
 		super.onRestart();
 		Log.d(this.getClass().getName(), ">>onRestart");
@@ -119,10 +129,13 @@ public class GameActivity extends Activity implements OnClickListener {
 			boolean validClick = boardView.moveTile(view);
 			if (validClick) {
 				updateClicks();
+				goodMove.start();
 				if (boardView.isWon()) {
 					Intent gameWon = new Intent(this, GameWonActivity.class);
 					startActivity(gameWon);
 				}
+			} else {
+				badMove.start();
 			}
 		}
 	}
