@@ -2,9 +2,10 @@ package net.april1.mystic;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class TileView extends TextView {
+public class TileView extends ImageView {
 	
 	private int row;
 	private int column;
@@ -31,8 +32,6 @@ public class TileView extends TextView {
 
 	public void setEmpty(boolean empty) {
 		this.empty = empty;
-		if (empty) 
-			this.setText("");
 	}
 
 	public int getRow() {

@@ -4,6 +4,8 @@ import java.util.Random;
 import java.util.Set;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -17,10 +19,13 @@ public class BoardView extends RelativeLayout {
 	private int tileSize = 69;
 	private TileView emptyTile;
 	private Context context;
+	private Bitmap image;
 
 	public BoardView(Context context, AttributeSet attrSet) {
 		super(context, attrSet);
 		this.context = context;
+		image = BitmapFactory.decodeResource(getResources(),
+				R.drawable.defaultimage);
 	}
 
 	public void start() {
@@ -40,6 +45,7 @@ public class BoardView extends RelativeLayout {
 	}
 
 	private void shuffleTiles() {
+		Log.d(this.getClass().getName(), ">>shuffleTiles");
 		int exchanges = random.nextInt(100);
 		TileView[] tiles = (TileView[]) gameTiles
 				.toArray(new TileView[gameTiles.size()]);
@@ -64,8 +70,11 @@ public class BoardView extends RelativeLayout {
 	}
 
 	private void createTiles() {
+		Log.d(this.getClass().getName(), ">>createTiles");
 		int emptyRow = random.nextInt(rowCount);
 		int emptyColumn = random.nextInt(columnCount);
+
+		Bitmap[] splitImage = splitImage();
 
 		RelativeLayout layout = (RelativeLayout) findViewById(R.id.mystic_grid);
 		gameTiles = new java.util.HashSet<TileView>();
@@ -78,12 +87,31 @@ public class BoardView extends RelativeLayout {
 					newView.setEmpty(true);
 					emptyTile = newView;
 				} else {
-					newView.setText(Integer.toString((row * columnCount)
-							+ column));
+					newView.setImageBitmap(splitImage[(row * columnCount)
+							+ column]);
 				}
 				gameTiles.add(newView);
 			}
 		}
+	}
+
+	private Bitmap[] splitImage() {
+		Log.d(this.getClass().getName(), ">>splitImage");
+		Bitmap returnImageArray[] = new Bitmap[rowCount * columnCount];
+		int width = columnCount * 100;
+		int height = rowCount * 100;
+		int buttonCount = rowCount * columnCount;
+
+		Bitmap scaledImage = Bitmap.createScaledBitmap(image, width, height,
+				true);
+		for (int index = 0; index < buttonCount; index++) {
+			returnImageArray[index] = Bitmap.createBitmap(scaledImage, 
+					width / columnCount * (index % columnCount), 
+					height / rowCount * (index / rowCount) , 
+					width / columnCount, height	/ rowCount);
+		}
+
+		return returnImageArray;
 	}
 
 	public void setRows(int rows) {
