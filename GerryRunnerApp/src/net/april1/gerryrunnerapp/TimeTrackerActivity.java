@@ -20,6 +20,8 @@ public class TimeTrackerActivity extends Activity {
 		ListView listView = (ListView) findViewById(R.id.times_list);
 		timeTrackerAdapter = new TimeTrackerAdapter();
 		listView.setAdapter(timeTrackerAdapter);
+		
+		TimeTrackerOpenHelper openHelper = new TimeTrackerOpenHelper(this);
 	}
 
 	@Override
