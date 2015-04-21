@@ -2,16 +2,17 @@ package net.april1.gerryrunnerapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class TimeListDatabaseHelper {
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 3;
 	private static final String DATABASE_NAME = "timetracker.db";
 	private static final String TABLE_NAME = "timerecords";
 
-	private static final String TIME_COLUMN_ID = "id";
+	private static final String TIME_COLUMN_ID = "_id";
 	private static final String TIMETRACKER_COLUMN_TIME = "time";
 	private static final String TIMETRACKER_COLUMN_NOTES = "notes";
 
@@ -31,12 +32,9 @@ public class TimeListDatabaseHelper {
 	}
 
 	public Cursor getAllTimeRecords() {
-		 return database.rawQuery(
-		 "select * from " + TABLE_NAME,
-		 null
-		 );
-		}
-	
+		return database.rawQuery("select * from " + TABLE_NAME, null);
+	}
+
 	private class TimeTrackerOpenHelper extends SQLiteOpenHelper {
 
 		TimeTrackerOpenHelper(Context context) {

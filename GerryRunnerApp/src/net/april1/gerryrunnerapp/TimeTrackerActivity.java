@@ -3,7 +3,6 @@ package net.april1.gerryrunnerapp;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,11 +18,12 @@ public class TimeTrackerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_time_tracker);
 
+		databaseHelper = new TimeListDatabaseHelper(this);
 		ListView listView = (ListView) findViewById(R.id.times_list);
-		timeTrackerAdapter = new TimeTrackerAdapter();
+		timeTrackerAdapter = new TimeTrackerAdapter(this,
+				databaseHelper.getAllTimeRecords(), 0); // don't forget the 0
 		listView.setAdapter(timeTrackerAdapter);
 
-		databaseHelper = new TimeListDatabaseHelper(this);
 	}
 
 	@Override
@@ -52,12 +52,9 @@ public class TimeTrackerActivity extends Activity {
 				String time = data.getStringExtra("time");
 
 				databaseHelper.saveTimeRecord(time, notes);
-				
-				timeTrackerAdapter.addTimeRecord(new TimeRecord(time, notes));
-
-				timeTrackerAdapter.notifyDataSetChanged();
+				timeTrackerAdapter.changeCursor(databaseHelper
+						.getAllTimeRecords());
 			}
 		}
 	}
-
 }

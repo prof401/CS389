@@ -14,21 +14,21 @@ public class AddTimeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_time);
 	}
-	
+
 	public void onCancel(View view) {
 		finish();
 	}
-	
+
 	public void onSave(View view) {
 		Intent intent = getIntent();
-		
-		EditText timeView = (EditText)findViewById(R.id.time_view);
-		intent.putExtra("time",  timeView.getText().toString());
-		
+
+		EditText timeView = (EditText) findViewById(R.id.time_view);
+		intent.putExtra("time", timeView.getText().toString());
+
 		EditText notesView = (EditText) findViewById(R.id.notes_view);
 		intent.putExtra("notes", notesView.getText().toString());
-		
-		this.setResult(RESULT_OK,intent);
+
+		this.setResult(RESULT_OK, intent);
 		finish();
 	}
 }

@@ -235,6 +235,30 @@ public class GameActivity extends Activity implements OnClickListener {
 		getMenuInflater().inflate(R.menu.game, menu);
 		return true;
 	}
+    protected void onStart() {
+    	Log.d(this.getClass().getName(), ">>onStart");
+	}
+
+    protected void onRestart() {
+    	Log.d(this.getClass().getName(), ">>onRestart");
+	}
+
+    protected void onResume() {
+    	Log.d(this.getClass().getName(), ">>onResume");
+	}
+
+    protected void onPause() {
+    	Log.d(this.getClass().getName(), ">>onPause");
+	}
+
+    protected void onStop() {
+    	Log.d(this.getClass().getName(), ">>onStop");
+	}
+
+    protected void onDestroy() {
+    	Log.d(this.getClass().getName(), ">>onDestroy");
+	}
+    
 
 	private void onWin() {
 		winnerDialog.show();
