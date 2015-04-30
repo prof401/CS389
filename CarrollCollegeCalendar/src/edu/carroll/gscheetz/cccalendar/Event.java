@@ -1,26 +1,34 @@
 package edu.carroll.gscheetz.cccalendar;
 
 public class Event {
-	private String id;
-	private String tital;
+	private long id;
+	private String title;
 	private String start;
 	private String end;
 	private String allDay;
 
-	public String getId() {
+	public Event(long id, String title, String start, String end, String allDay) {
+		this.id = id;
+		this.title = title;
+		this.start = start;
+		this.end = end;
+		this.allDay = allDay;
+	}
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public String getTital() {
-		return tital;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setTital(String tital) {
-		this.tital = tital;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getStart() {
