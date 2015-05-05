@@ -50,11 +50,14 @@ public class EventAdapter extends BaseAdapter {
 
 		Event event = this.getItem(index);
 
-		TextView timeTextView = (TextView) view.findViewById(R.id.title_view);
-		timeTextView.setText(event.getTitle());
+		TextView titleView = (TextView) view.findViewById(R.id.title_view);
+		titleView.setText(event.getTitle());
 
-		TextView notesTextView = (TextView) view.findViewById(R.id.start_view);
-		notesTextView.setText(event.getStart());
+		TextView startView = (TextView) view.findViewById(R.id.start_view);
+		startView.setText(event.getStartString());
+
+		TextView endView = (TextView) view.findViewById(R.id.end_view);
+		endView.setText(event.getEndString());
 
 		return view;
 	}

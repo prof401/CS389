@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -16,9 +18,7 @@ import android.util.JsonReader;
 import android.util.Log;
 
 public class CCNetwork {
-	private static final String CALENDAR_URL = "http://www.carroll.edu/jScripts/fullcalendar/eventCal.php?start=1427608800&end=1430632800";
-
-	// http://developer.android.com/reference/android/util/JsonReader.html
+	private static final String CALENDAR_URL = "http://www.carroll.edu/jScripts/fullcalendar/eventCal.php?start=1420070400&end=1609459199";
 
 	public List<Event> getEventList() {
 		Log.d(this.getClass().getSimpleName(), ">>getEventList");
@@ -52,7 +52,24 @@ public class CCNetwork {
 		Log.d(this.getClass().getName(), "##getJsonCalendar.returnList size: "
 				+ returnList.size());
 
+		Collections.sort(returnList, new Comparator<Event>() {
+
+			@Override
+			public int compare(Event i1, Event i2) {
+				return (i1.getStart().compareTo(i2.getStart()));
+			}
+
+		});
+
 		return returnList;
+	}
+
+	private boolean readStringBoolean(JsonReader reader) throws IOException {
+		boolean returnValue = false;
+
+		String booleanString = reader.nextString();
+		returnValue = Boolean.parseBoolean(booleanString);
+		return returnValue;
 	}
 
 	private List<Event> readJsonStream(InputStream in) throws IOException {
@@ -80,7 +97,7 @@ public class CCNetwork {
 		String title = null;
 		String start = null;
 		String end = null;
-		String allDay = null;
+		boolean allDay = false;
 
 		reader.beginObject();
 		while (reader.hasNext()) {
@@ -94,7 +111,7 @@ public class CCNetwork {
 			} else if (name.equals("end")) {
 				end = reader.nextString();
 			} else if (name.equals("allDay")) {
-				allDay = reader.nextString();
+				allDay = readStringBoolean(reader);
 			} else {
 				reader.skipValue();
 			}
@@ -102,5 +119,4 @@ public class CCNetwork {
 		reader.endObject();
 		return new Event(id, title, start, end, allDay);
 	}
-
 }
