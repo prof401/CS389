@@ -6,6 +6,7 @@ import edu.carroll.carrollcollegecalendar.R;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.ListView;
@@ -50,22 +51,23 @@ public class CalendarActivity extends Activity {
 	private void loadFields() {
 		Log.d(this.getClass().getSimpleName(), ">>populateEventList");
 
-		// final ProgressDialog dialog = ProgressDialog.show(this,
-		// getResources()
-		// .getString(R.string.loading),
-		// getResources().getString(R.string.loadingtext));
-		//
+		final ProgressDialog dialog = ProgressDialog.show(this, getResources()
+				.getString(R.string.loading),
+				getResources().getString(R.string.loadingtext));
+
 		final CCNetwork network = new CCNetwork();
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				Log.i(this.getClass().getName(), ">>run");
 				try {
+					dialog.show();
 					Log.d(this.getClass().getSimpleName(),
 							"##about to populate eventList");
 					events = network.getEventList();
 					handler.sendEmptyMessage(2);
 					Log.d(this.getClass().getName(), "##eventList populated");
+					dialog.dismiss();
 				} catch (Exception e) {
 					e.printStackTrace();
 				} // end try-catch
