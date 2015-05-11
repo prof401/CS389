@@ -86,7 +86,10 @@ public class CCNetwork {
 
 		reader.beginArray();
 		while (reader.hasNext()) {
-			messages.add(readMessage(reader));
+			Event newEvent = readMessage(reader);
+			if (newEvent.getStart().after(new java.util.Date())) {
+				messages.add(newEvent);
+			}
 		}
 		reader.endArray();
 		return messages;

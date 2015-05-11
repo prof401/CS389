@@ -8,6 +8,8 @@ public class CCCalendar {
 
 	private List<Event> eventList;
 	private CCNetwork network;
+	private final String TAG = this.getClass().getSimpleName();
+
 
 	public CCCalendar() {
 		Log.d(this.getClass().getName(), "++CCalendar");
@@ -15,12 +17,12 @@ public class CCCalendar {
 	}
 
 	private void populateDatabase() {
-		Log.d(this.getClass().getSimpleName(), ">>populateDatabase");
+		Log.d(TAG, ">>populateDatabase");
 		populateEventList();
 	}
 
 	private void populateEventList() {
-		Log.d(this.getClass().getSimpleName(), ">>populateEventList");
+		Log.d(TAG, ">>populateEventList");
 
 		// final ProgressDialog dialog = ProgressDialog.show(this,
 		// getResources()

@@ -1,10 +1,10 @@
 package edu.carroll.gscheetz.cccalendar;
 
 import java.util.List;
-
 import edu.carroll.carrollcollegecalendar.R;
 import android.os.Bundle;
 import android.os.Handler;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.util.Log;
@@ -15,6 +15,7 @@ public class CalendarActivity extends Activity {
 
 	private EventAdapter eventAdapter;
 	private List<Event> events;
+	private final String TAG = this.getClass().getSimpleName();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class CalendarActivity extends Activity {
 		loadFields();
 	}
 
+	@SuppressLint("HandlerLeak")
 	final Handler handler = new Handler() {
 		@Override
 		public void handleMessage(android.os.Message msg) {
@@ -49,7 +51,7 @@ public class CalendarActivity extends Activity {
 	}
 
 	private void loadFields() {
-		Log.d(this.getClass().getSimpleName(), ">>populateEventList");
+		Log.d(TAG, ">>populateEventList");
 
 		final ProgressDialog dialog = ProgressDialog.show(this, getResources()
 				.getString(R.string.loading),
@@ -62,8 +64,7 @@ public class CalendarActivity extends Activity {
 				Log.i(this.getClass().getName(), ">>run");
 				try {
 					dialog.show();
-					Log.d(this.getClass().getSimpleName(),
-							"##about to populate eventList");
+					Log.d(TAG, "##about to populate eventList");
 					events = network.getEventList();
 					handler.sendEmptyMessage(2);
 					Log.d(this.getClass().getName(), "##eventList populated");

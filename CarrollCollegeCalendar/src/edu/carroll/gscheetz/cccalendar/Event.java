@@ -1,5 +1,6 @@
 package edu.carroll.gscheetz.cccalendar;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,7 +10,9 @@ import java.util.Locale;
 
 import android.util.Log;
 
-public class Event {
+public class Event implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private static final SimpleDateFormat INPUT_DATE_FORMAT = new SimpleDateFormat(
 			"yyyy-MM-dd'T'HH:mm:ss", Locale.US);
 	private static final SimpleDateFormat OUTPUT_DATE_FORMAT = new SimpleDateFormat(

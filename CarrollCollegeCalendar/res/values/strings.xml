@@ -3,7 +3,7 @@
 
     <string name="app_name">Carroll College Calendar</string>
     <string name="action_settings">Settings</string>
-    <string name="loading">Loading&#8230;</string>
-    <string name="loadingtext">Getting calendar data from network</string>
+    <string name="loading">Updating calendar data</string>
+    <string name="loadingtext">Please wait&#8230;</string>
     
 </resources>
