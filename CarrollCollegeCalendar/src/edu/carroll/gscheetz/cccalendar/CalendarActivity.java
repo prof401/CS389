@@ -61,7 +61,7 @@ public class CalendarActivity extends Activity {
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Log.i(this.getClass().getName(), ">>run");
+				Log.i(TAG, ">>run");
 				try {
 					dialog.show();
 					Log.d(TAG, "##about to populate eventList");
@@ -74,9 +74,9 @@ public class CalendarActivity extends Activity {
 				} // end try-catch
 			} // end run function
 		}); // end new runnable, close new thread function
-		Log.d(this.getClass().getName(), "##start thread");
+		Log.d(TAG, "##start thread");
 		thread.start();
-		Log.d(this.getClass().getName(), "##after start thread");
+		Log.d(TAG, "##after start thread");
 	}
 
 }
