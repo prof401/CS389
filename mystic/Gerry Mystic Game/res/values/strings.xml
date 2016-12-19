@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mystic Square</string>
+    <string name="action_settings">Settings</string>
+    <string name="thumbsup">Thumbs up</string>
+    <string name="youwon">You Won!!!</string>
+    <string name="action_new_game">New Game</string>
+    <string name="action_load_image">Load Gallery Image</string>
+
+</resources>
